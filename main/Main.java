@@ -1,6 +1,8 @@
 package main;
 
 
+import main.heroes.Player;
+import main.heroes.PlayerCreator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
         GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
-
         GameInput gameInput = gameInputLoader.load();
         int x, y;
         int n = gameInput.getN();
@@ -20,7 +21,7 @@ public class Main {
         List<List<String>> positions = gameInput.getPositions();
         List<List<String>> moves = gameInput.getMoves();
 
-        List<heroes.Player> players = new ArrayList<>();
+        List<Player> players = new ArrayList<>();
 
 //        System.out.println(land.toString());
 //        System.out.println(positions.toString());
@@ -33,7 +34,7 @@ public class Main {
             hero = currPlayer.get(0);
             x = Integer.parseInt(currPlayer.get(1));
             y = Integer.parseInt(currPlayer.get(2));
-            players.add(heroes.PlayerCreator.getPlayer(hero, x, y));
+            players.add(PlayerCreator.getPlayer(hero, x, y));
         }
 
         char[][] map = new char[n][m];
@@ -63,7 +64,6 @@ public class Main {
         for (int i = 0; i < r; ++i) {
             currMoves = moves.get(i);
             currMove = currMoves.get(0);
-//            System.out.println(currMove);
             for (int j = 0; j < p; ++j) {
                 switch (currMove.charAt(j)) {
                     case 'L':
@@ -83,39 +83,46 @@ public class Main {
                         break;
                 }
             }
-            for (heroes.Player it : players) {
+            for (Player it : players) {
                 it.resetFight();
             }
             int X, Y;
             double firstDamage, secondDamage;
             for (int j = 0; j < p; ++j) {
-                for (heroes.Player it : players) {
+                for (Player it : players) {
                     if (!players.get(j).equals(it)) {
                         X = players.get(j).getX();
                         Y = players.get(j).getY();
                         if (X == it.getX() && Y == it.getY()
                                 && it.getFight() == false && players.get(j).getFight() == false) {
 
-                                firstDamage = it.isAttackedBy(players.get(j), map[X][Y]);
-                                it.setFight();
+                            firstDamage = it.isAttackedBy(players.get(j), map[X][Y]);
+                            it.setFight();
+//                            System.out.println(it.getName() + ":" + (it.getHp() - firstDamage));
+                            secondDamage = players.get(j).isAttackedBy(it, map[X][Y]);
+                            players.get(j).setFight();
+//                            System.out.println(players.get(j).getName() + ":" + (players.get(j).getHp() - secondDamage));
+                            it.checkOvertime(players.get(j));
+                            players.get(j).checkOvertime(it);
 
-                                secondDamage = players.get(j).isAttackedBy(it, map[X][Y]);
-                                players.get(j).setFight();
+                            if (firstDamage >= it.getHp() && it.getHp() > 0) {
+                                it.setHp(0);
+                                players.get(j).addXp(it);
+                            }
 
-                                it.checkOvertime(players.get(j));
-                                players.get(j).checkOvertime(it);
+                            if (secondDamage >= players.get(j).getHp() && players.get(j).getHp() > 0) {
+                                players.get(j).setHp(0);
+                                it.addXp(players.get(j));
+                            }
 
                             if (firstDamage < it.getHp()) {
                                 it.setHp(it.getHp() - firstDamage);
                             }
+
                             if (secondDamage < players.get(j).getHp()) {
                                 players.get(j).setHp((players.get(j).getHp() - secondDamage));
                             }
 
-                            if (firstDamage >= it.getHp()) {
-                                it.setHp(0);
-                                players.get(j).addXp(it);
-                            }
 
 //                            System.out.println(it.getName() + " " + it.getHp());
 //                            System.out.println(players.get(j).getName() + " " + players.get(j).getHp());
@@ -138,14 +145,23 @@ public class Main {
             }
         }
 
-        for (heroes.Player it : players) {
-            if (it.getHp() <= 0) {
-                System.out.println(it.getName() + " dead");
-            } else {
-                System.out.println(it.getName() + " " + it.getLevel()
-                + " " + it.getXp() + " " + it.getHp() + " "
-                + it.getX() + " " + it.getY());
+        String filename = args[1];
+        try {
+            fileio.implementations.FileWriter fileWriter = new fileio.implementations.FileWriter(filename);
+            for (Player it : players) {
+                if (it.getHp() <= 0) {
+                    fileWriter.writeWord(it.getName() + " dead");
+                    fileWriter.writeNewLine();
+                } else {
+                    fileWriter.writeWord((it.getName() + " " + it.getLevel()
+                            + " " + it.getXp() + " " + (int) it.getHp() + " "
+                            + it.getX() + " " + it.getY()));
+                    fileWriter.writeNewLine();
+                }
             }
+            fileWriter.close();
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
     }
 }
