@@ -25,28 +25,33 @@ public class Rogue extends Player {
     public double attack(Knight knight, char landType) {
         // backstab
         double damage = 200 + 20 * knight.getLevel();
-        backstab++;
         // paralysis
+        if ((backstab % 3 ) == 0 && landType == 'W') {
+            damage *= 1.5;
+        }
         damage *= 0.9f;
+        damage = Math.round(damage);
         double paralysisDamage;
         knight.canMove = false;
         paralysisDamage = 40 + 10 * knight.getLevel();
-        knight.overtimeDamage = paralysisDamage;
-        knight.overtimeDamage -= 0.20f * knight.overtimeDamage;
-        Math.round(knight.overtimeDamage);
         paralysisDamage *= 0.80f;
-        if (backstab % 3 == 0 && landType == 'W') {
-            damage *= 1.5;
-        }
+        paralysisDamage = Math.round(paralysisDamage);
+        knight.overtimeDamage = paralysisDamage;
+        Math.round(knight.overtimeDamage);
         knight.overtimeRounds = 3;
+        damage += paralysisDamage;
+        damage = Math.round(damage);
         if (landType == 'W') {
             knight.overtimeRounds = 6;
             damage *= 1.15f;
+            damage = Math.round(damage);
         }
 //        if (knight.overtimeRounds == 3 || knight.overtimeRounds == 6) {
 //            damage += paralysisDamage;
 //            return damage;
 //        }
+        backstab++;
+        damage = Math.round(damage);
         return damage;
     }
 
