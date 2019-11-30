@@ -23,37 +23,48 @@ public class Wizard extends Player {
         float damage, firstSkill, secondSkill;
         float procentFirstSkill;
         float procentSecondSkill;
-        procentFirstSkill = 0.2f + 0.05f * knight.getLevel();
+
+        procentFirstSkill = 0.2f + 0.05f * this.getLevel();
+
         float baseHp;
         float damageReceived;
         float opponentMaxHp = Constants.knightHp + Constants.knightHpPerLevel * knight.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, knight.getHp());
         procentFirstSkill *= Constants.drainKnight;
-        procentFirstSkill = procentFirstSkill + (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
+        if (landType == 'D') {
+            firstSkill *= 1.1f;
+        }
+
         // deflect
         float damageDeflect;
-        damageReceived = Constants.execute + Constants.executeBonus * this.level;
-        damageReceived += Constants.slam + Constants.slamBonus * this.level;
-        damageDeflect = 0.35f * damageReceived;
-        damageDeflect = Math.round(damageDeflect);
-        procentSecondSkill = (0.02f * knight.getLevel());
 
-        if (procentSecondSkill <= 0.7f) {
-            secondSkill = (procentSecondSkill * damageDeflect +  damageDeflect);
-        } else {
-            secondSkill = (0.7f * damageReceived);
+        int knightDamage = 0;
+
+        damageReceived = knightDamage + Constants.executeBonus * knight.level;
+        damageReceived += Constants.ignite + Constants.ignite * knight.level;
+        if (landType == 'L') {
+            damageReceived *= 1.15f;
+        }
+        procentSecondSkill = 0.35f + (1.02f * knight.getLevel());
+        if (procentSecondSkill > 0.7f) {
+            procentSecondSkill = 0.7f;
         }
 
-        secondSkill *= Constants.deflectKnight;
+        damageDeflect = procentSecondSkill * damageReceived;
+        damageDeflect = Math.round(damageDeflect);
+        secondSkill = damageDeflect;
+
+        secondSkill *= Constants.deflectPyromancer;
         secondSkill = Math.round(secondSkill);
 
-        damage = firstSkill + secondSkill;
-
         if (landType == 'D') {
-            damage *= 1.1f;
+            secondSkill *= 1.1f;
         }
+
+        secondSkill = Math.round(secondSkill);
+        damage = firstSkill + secondSkill;
         return damage;
     }
 
@@ -81,7 +92,9 @@ public class Wizard extends Player {
 
         damageReceived = Constants.fireblast + Constants.fireblastBonus * pyromancer.level;
         damageReceived += Constants.ignite + Constants.ignite * pyromancer.level;
-
+        if (landType == 'V') {
+            damageReceived *= 1.25f;
+        }
         procentSecondSkill = 0.35f + (1.02f * pyromancer.getLevel());
         if (procentSecondSkill > 0.7f) {
             procentSecondSkill = 0.7f;
@@ -100,46 +113,54 @@ public class Wizard extends Player {
 
         secondSkill = Math.round(secondSkill);
         damage = firstSkill + secondSkill;
-//        System.out.println("First: " + firstSkill);
-//        System.out.println("Second: " + secondSkill);
         return damage;
     }
 
     @Override
     public float attack(Rogue rogue, char landType) {
-//        System.out.println("Damage by wizard to rogue on land: " + landType);
         float damage, firstSkill, secondSkill;
         float procentFirstSkill;
         float procentSecondSkill;
-        procentFirstSkill = 0.2f + 0.05f * rogue.getLevel();
+
+        procentFirstSkill = 0.2f + 0.05f * this.getLevel();
+
         float baseHp;
         float damageReceived;
-        float opponentMaxHp = 600 + 40 * rogue.getLevel();
+        float opponentMaxHp = Constants.rogueHp + Constants.rogueHpPerLevel * rogue.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, rogue.getHp());
-        procentFirstSkill = procentFirstSkill - (float) (0.2f * procentFirstSkill);
+        procentFirstSkill *= Constants.drainRogue;
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
+        if (landType == 'D') {
+            firstSkill *= 1.1f;
+        }
+
         // deflect
         float damageDeflect;
-        damageReceived = 200 + 20 * this.level;
-        damageReceived += 40 + 10 * this.level;
-        damageDeflect = 0.35f * damageReceived;
-        damageDeflect = Math.round(damageDeflect);
-        procentSecondSkill = (float) (0.02f * rogue.getLevel());
-        if (procentSecondSkill <= 0.7f) {
-            secondSkill = (float) (procentSecondSkill * damageDeflect +  damageDeflect);
-        } else {
-            secondSkill = (float) (0.7f * damageReceived);
+
+        damageReceived = Constants.backstab + Constants.backstabBonus * rogue.level;
+        damageReceived += Constants.paralysis + Constants.paralysisBonus * rogue.level;
+        if (landType == 'W') {
+            damageReceived *= 1.15f;
+        }
+        procentSecondSkill = 0.35f + (1.02f * rogue.getLevel());
+        if (procentSecondSkill > 0.7f) {
+            procentSecondSkill = 0.7f;
         }
 
-        secondSkill *= 1.2f;
+        damageDeflect = procentSecondSkill * damageReceived;
+        damageDeflect = Math.round(damageDeflect);
+        secondSkill = damageDeflect;
+
+        secondSkill *= Constants.deflectRogue;
         secondSkill = Math.round(secondSkill);
 
-        damage = firstSkill + secondSkill;
-
         if (landType == 'D') {
-            damage *= 1.1f;
+            secondSkill *= 1.1f;
         }
+
+        secondSkill = Math.round(secondSkill);
+        damage = firstSkill + secondSkill;
         return damage;
     }
 

@@ -45,4 +45,12 @@ public class Constants {
     public static float slamKnight = 1.2f;
     public static float slamPyromancer = 0.9f;
     public static float slamWizard = 1.05f;
+
+    // rogue
+    public static float rogueHp = 600;
+    public static float rogueHpPerLevel = 40;
+    public static float backstab = 200;
+    public static float backstabBonus = 20;
+    public static float paralysis = 40;
+    public static float paralysisBonus = 10;
 }
