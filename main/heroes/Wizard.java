@@ -139,10 +139,16 @@ public class Wizard extends Player {
         float damageDeflect;
 
         damageReceived = Constants.backstab + Constants.backstabBonus * rogue.level;
+        if (rogue.getBackstab() % 3 == 0 && landType == 'W') {
+            damageReceived *= 1.5f;
+        }
         damageReceived += Constants.paralysis + Constants.paralysisBonus * rogue.level;
+
         if (landType == 'W') {
             damageReceived *= 1.15f;
         }
+
+
         procentSecondSkill = 0.35f + (1.02f * rogue.getLevel());
         if (procentSecondSkill > 0.7f) {
             procentSecondSkill = 0.7f;

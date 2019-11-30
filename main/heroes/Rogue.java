@@ -14,6 +14,10 @@ public class Rogue extends Player {
         this.overtimeRounds = 0;
     }
 
+    public int getBackstab() {
+        return backstab;
+    }
+
     @Override
     public float isAttackedBy(Player player, char landType) {
         float damage = player.attack(this, landType);
