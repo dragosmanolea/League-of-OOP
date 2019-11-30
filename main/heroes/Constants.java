@@ -34,7 +34,15 @@ public class Constants {
     public static double knightHpPerLevel = 80;
     public static double execute = 200;
     public static double executeBonus = 30;
-    public static double hpLimit = 0.2f;
+    public static double procentHp = 0.2f;
     public static double slam = 100;
     public static double slamBonus = 40;
+    public static double executeRogue = 1.15f;
+    public static double executeKnight = 1f;
+    public static double executePyromancer = 1.1f;
+    public static double executeWizard = 0.8f;
+    public static double slamRogue = 0.8f;
+    public static double slamKnight = 1.2f;
+    public static double slamPyromancer = 0.9f;
+    public static double slamWizard = 1.05f;
 }

@@ -10,7 +10,7 @@ public abstract class Player {
     protected int x;
     protected int y;
     protected int overtimeRounds;
-    protected int overtimeDamage;
+    protected double overtimeDamage;
     protected boolean fight;
     protected String name;
 //    protected double damageReceived;
