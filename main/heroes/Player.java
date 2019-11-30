@@ -2,7 +2,7 @@ package main.heroes;
 
 public abstract class Player {
     protected int xp = 0;
-    protected double hp;
+    protected float hp;
     protected int maxHp;
     protected int level = 0;
     protected int xpLevelUp;
@@ -10,17 +10,17 @@ public abstract class Player {
     protected int x;
     protected int y;
     public int overtimeRounds;
-    protected double overtimeDamage;
+    protected float overtimeDamage;
     protected boolean fight;
     protected String name;
-//    protected double damageReceived;
+//    protected float damageReceived;
     protected boolean canMove;
 
-//    public void setDamageReceived(double damage) {
+//    public void setDamageReceived(float damage) {
 //        this.damageReceived = damage;
 //    }
 
-    public void setHp(double hp) {
+    public void setHp(float hp) {
         this.hp = hp;
     }
 
@@ -91,7 +91,7 @@ public abstract class Player {
         return xp;
     }
 
-    public double getHp() {
+    public float getHp() {
         return hp;
     }
 
@@ -109,7 +109,7 @@ public abstract class Player {
 
 
 
-//    public void checkIgniteToTake(int roundsRemained, double modificator) {
+//    public void checkIgniteToTake(int roundsRemained, float modificator) {
 //        int damage;
 //        if (roundsRemained == 3) {
 //            roundsRemained--;
@@ -122,9 +122,9 @@ public abstract class Player {
 //        }
 //    }
 
-    public abstract double isAttackedBy(Player player, char landType);
-    public abstract double attack(Knight knight, char landType);
-    public abstract double attack(Pyromancer pyromancer, char landType);
-    public abstract double attack(Rogue rogue, char landType);
-    public abstract double attack(Wizard wizard, char landType);
+    public abstract float isAttackedBy(Player player, char landType);
+    public abstract float attack(Knight knight, char landType);
+    public abstract float attack(Pyromancer pyromancer, char landType);
+    public abstract float attack(Rogue rogue, char landType);
+    public abstract float attack(Wizard wizard, char landType);
 }

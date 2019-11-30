@@ -88,8 +88,8 @@ public class Main {
                 it.checkOvertime();
             }
             int X, Y;
-            double firstDamage = 0;
-            double secondDamage = 0;
+            float firstDamage = 0;
+            float secondDamage = 0;
             for (int j = 0; j < p; ++j) {
                 for (Player it : players) {
                     if (!players.get(j).equals(it)) {

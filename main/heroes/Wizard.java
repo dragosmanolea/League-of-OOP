@@ -3,7 +3,7 @@ package main.heroes;
 public class Wizard extends Player {
 //    public final String name;
     private int bonusHpPerLevel = 30;
-    private double initialHp = 400;
+    private float initialHp = 400;
     public Wizard(int x, int y) {
         this.hp = initialHp;
         this.x = x;
@@ -13,27 +13,27 @@ public class Wizard extends Player {
     }
 
     @Override
-    public double isAttackedBy(Player player, char landType) {
-        double damage = player.attack(this, landType);
+    public float isAttackedBy(Player player, char landType) {
+        float damage = player.attack(this, landType);
         damage = Math.round(damage);
         return damage;
     }
     @Override
-    public double attack(Knight knight, char landType) {
-        double damage, firstSkill, secondSkill;
-        double procentFirstSkill;
-        double procentSecondSkill;
+    public float attack(Knight knight, char landType) {
+        float damage, firstSkill, secondSkill;
+        float procentFirstSkill;
+        float procentSecondSkill;
         procentFirstSkill = 0.2f + 0.05f * knight.getLevel();
-        double baseHp;
-        double damageReceived;
-        double opponentMaxHp = Constants.knightHp + Constants.knightHpPerLevel * knight.getLevel();
-        baseHp = Math.min(0.3 * opponentMaxHp, knight.getHp());
+        float baseHp;
+        float damageReceived;
+        float opponentMaxHp = Constants.knightHp + Constants.knightHpPerLevel * knight.getLevel();
+        baseHp = (float) Math.min(0.3 * opponentMaxHp, knight.getHp());
         procentFirstSkill *= Constants.drainKnight;
         procentFirstSkill = procentFirstSkill + (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
         // deflect
-        double damageDeflect;
+        float damageDeflect;
         damageReceived = Constants.execute + Constants.executeBonus * this.level;
         damageReceived += Constants.slam + Constants.slamBonus * this.level;
         damageDeflect = 0.35f * damageReceived;
@@ -58,30 +58,30 @@ public class Wizard extends Player {
     }
 
     @Override
-    public double attack(Pyromancer pyromancer, char landType) {
-        double damage, firstSkill, secondSkill;
-        double procentFirstSkill;
-        double procentSecondSkill;
+    public float attack(Pyromancer pyromancer, char landType) {
+        float damage, firstSkill, secondSkill;
+        float procentFirstSkill;
+        float procentSecondSkill;
         procentFirstSkill = 0.2f + 0.05f * pyromancer.getLevel();
-        double baseHp;
-        double damageReceived;
-        double opponentMaxHp = Constants.pyromancerHp + Constants.pyromancerHpPerLevel * pyromancer.getLevel();
-        baseHp = (double) Math.min(0.3 * opponentMaxHp, pyromancer.getHp());
+        float baseHp;
+        float damageReceived;
+        float opponentMaxHp = Constants.pyromancerHp + Constants.pyromancerHpPerLevel * pyromancer.getLevel();
+        baseHp = (float) Math.min(0.3 * opponentMaxHp, pyromancer.getHp());
         procentFirstSkill *= Constants.drainPyormancer;
-        procentFirstSkill = procentFirstSkill - (double) (0.2f * procentFirstSkill);
+        procentFirstSkill = procentFirstSkill - (float) (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
         // deflect
-        double damageDeflect;
+        float damageDeflect;
         damageReceived = Constants.fireblast + Constants.fireblastBonus * this.level;
         damageReceived += Constants.ignite + Constants.ignite * this.level;
         damageDeflect = 0.35f * damageReceived;
         damageDeflect = Math.round(damageDeflect);
-        procentSecondSkill = (double) (0.02f * pyromancer.getLevel());
+        procentSecondSkill = (float) (0.02f * pyromancer.getLevel());
         if (procentSecondSkill <= 0.7f) {
-            secondSkill = (double) (procentSecondSkill * damageDeflect +  damageDeflect);
+            secondSkill = (float) (procentSecondSkill * damageDeflect +  damageDeflect);
         } else {
-            secondSkill = (double) (0.7f * damageReceived);
+            secondSkill = (float) (0.7f * damageReceived);
         }
 
         secondSkill *= Constants.deflectPyromancer;
@@ -96,30 +96,30 @@ public class Wizard extends Player {
     }
 
     @Override
-    public double attack(Rogue rogue, char landType) {
+    public float attack(Rogue rogue, char landType) {
 //        System.out.println("Damage by wizard to rogue on land: " + landType);
-        double damage, firstSkill, secondSkill;
-        double procentFirstSkill;
-        double procentSecondSkill;
+        float damage, firstSkill, secondSkill;
+        float procentFirstSkill;
+        float procentSecondSkill;
         procentFirstSkill = 0.2f + 0.05f * rogue.getLevel();
-        double baseHp;
-        double damageReceived;
-        double opponentMaxHp = 600 + 40 * rogue.getLevel();
-        baseHp = (double) Math.min(0.3 * opponentMaxHp, rogue.getHp());
-        procentFirstSkill = procentFirstSkill - (double) (0.2f * procentFirstSkill);
+        float baseHp;
+        float damageReceived;
+        float opponentMaxHp = 600 + 40 * rogue.getLevel();
+        baseHp = (float) Math.min(0.3 * opponentMaxHp, rogue.getHp());
+        procentFirstSkill = procentFirstSkill - (float) (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
         // deflect
-        double damageDeflect;
+        float damageDeflect;
         damageReceived = 200 + 20 * this.level;
         damageReceived += 40 + 10 * this.level;
         damageDeflect = 0.35f * damageReceived;
         damageDeflect = Math.round(damageDeflect);
-        procentSecondSkill = (double) (0.02f * rogue.getLevel());
+        procentSecondSkill = (float) (0.02f * rogue.getLevel());
         if (procentSecondSkill <= 0.7f) {
-            secondSkill = (double) (procentSecondSkill * damageDeflect +  damageDeflect);
+            secondSkill = (float) (procentSecondSkill * damageDeflect +  damageDeflect);
         } else {
-            secondSkill = (double) (0.7f * damageReceived);
+            secondSkill = (float) (0.7f * damageReceived);
         }
 
         secondSkill *= 1.2f;
@@ -134,21 +134,21 @@ public class Wizard extends Player {
     }
 
     @Override
-    public double attack(Wizard wizard, char landType) {
+    public float attack(Wizard wizard, char landType) {
         // WIZARD LA WIZARD NU ARE DEFLECT
-        double damage, firstSkill;
-        double procentFirstSkill;
+        float damage, firstSkill;
+        float procentFirstSkill;
         procentFirstSkill = 0.2f + 0.05f * wizard.getLevel();
-        double baseHp;
-        double opponentMaxHp = Constants.wizardHp + Constants.wizardHpPerLevel * wizard.getLevel();
-        baseHp = Math.min(0.3 * opponentMaxHp, wizard.getHp());
+        float baseHp;
+        float opponentMaxHp = Constants.wizardHp + Constants.wizardHpPerLevel * wizard.getLevel();
+        baseHp = (float) Math.min(0.3 * opponentMaxHp, wizard.getHp());
         procentFirstSkill *= Constants.drainWizard;
         procentFirstSkill = procentFirstSkill - (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
         damage = firstSkill;
         // deflect
-//        double damageDeflect;
+//        float damageDeflect;
 //        damageReceived = Constants.dra + Constants.fireblastBonus * this.level;
 //        damageReceived += Constants.ignite + Constants.ignite * this.level;
 //        damageDeflect = 0.35f * damageReceived;
