@@ -62,36 +62,46 @@ public class Wizard extends Player {
         float damage, firstSkill, secondSkill;
         float procentFirstSkill;
         float procentSecondSkill;
-        procentFirstSkill = 0.2f + 0.05f * pyromancer.getLevel();
+
+        procentFirstSkill = 0.2f + 0.05f * this.getLevel();
+
         float baseHp;
         float damageReceived;
         float opponentMaxHp = Constants.pyromancerHp + Constants.pyromancerHpPerLevel * pyromancer.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, pyromancer.getHp());
         procentFirstSkill *= Constants.drainPyormancer;
-        procentFirstSkill = procentFirstSkill - (float) (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
+        if (landType == 'D') {
+            firstSkill *= 1.1f;
+        }
+
         // deflect
         float damageDeflect;
-        damageReceived = Constants.fireblast + Constants.fireblastBonus * this.level;
-        damageReceived += Constants.ignite + Constants.ignite * this.level;
-        damageDeflect = 0.35f * damageReceived;
-        damageDeflect = Math.round(damageDeflect);
-        procentSecondSkill = (float) (0.02f * pyromancer.getLevel());
-        if (procentSecondSkill <= 0.7f) {
-            secondSkill = (float) (procentSecondSkill * damageDeflect +  damageDeflect);
-        } else {
-            secondSkill = (float) (0.7f * damageReceived);
+
+        damageReceived = Constants.fireblast + Constants.fireblastBonus * pyromancer.level;
+        damageReceived += Constants.ignite + Constants.ignite * pyromancer.level;
+
+        procentSecondSkill = 0.35f + (1.02f * pyromancer.getLevel());
+        if (procentSecondSkill > 0.7f) {
+            procentSecondSkill = 0.7f;
         }
+
+        damageDeflect = procentSecondSkill * damageReceived;
+        damageDeflect = Math.round(damageDeflect);
+        secondSkill = damageDeflect;
 
         secondSkill *= Constants.deflectPyromancer;
         secondSkill = Math.round(secondSkill);
 
-        damage = firstSkill + secondSkill;
-
         if (landType == 'D') {
-            damage *= 1.1f;
+            secondSkill *= 1.1f;
         }
+
+        secondSkill = Math.round(secondSkill);
+        damage = firstSkill + secondSkill;
+//        System.out.println("First: " + firstSkill);
+//        System.out.println("Second: " + secondSkill);
         return damage;
     }
 
