@@ -60,12 +60,4 @@ public class GameInput {
     public final int getP() {
         return p;
     }
-
-    public final boolean isValidInput() {
-//        boolean membersInstantiated = mAssetOrder != null && mPlayersOrder != null;
-//        boolean membersNotEmpty = mAssetOrder.size() > 0 && mPlayersOrder.size() > 0 && mRounds > 0;
-
-//        return membersInstantiated && membersNotEmpty;
-        return true;
-    }
 }

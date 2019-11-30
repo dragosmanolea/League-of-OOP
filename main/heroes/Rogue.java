@@ -11,6 +11,7 @@ public class Rogue extends Player {
         this.y = y;
         this.name = "R";
         this.backstab = 0;
+        this.overtimeRounds = 0;
     }
 
     @Override
@@ -22,28 +23,30 @@ public class Rogue extends Player {
 
     @Override
     public double attack(Knight knight, char landType) {
-        double damage = 200 + 20 * knight.getLevel();
         // backstab
+        double damage = 200 + 20 * knight.getLevel();
         backstab++;
-        if (backstab % 3 == 0) {
-            damage *= 1.5;
-        }
-        damage /= 0.1f;
         // paralysis
+        damage *= 0.9f;
         double paralysisDamage;
         knight.canMove = false;
-        knight.overtimeDamage = 40 + 10 * knight.getLevel();
+        paralysisDamage = 40 + 10 * knight.getLevel();
+        knight.overtimeDamage = paralysisDamage;
         knight.overtimeDamage -= 0.20f * knight.overtimeDamage;
+        Math.round(knight.overtimeDamage);
+        paralysisDamage *= 0.80f;
+        if (backstab % 3 == 0 && landType == 'W') {
+            damage *= 1.5;
+        }
         knight.overtimeRounds = 3;
         if (landType == 'W') {
             knight.overtimeRounds = 6;
-        }
-        if (landType == 'W') {
             damage *= 1.15f;
         }
-        paralysisDamage = 40 + 10 * knight.getLevel();
-        paralysisDamage *= 1.25f;
-        damage += paralysisDamage;
+//        if (knight.overtimeRounds == 3 || knight.overtimeRounds == 6) {
+//            damage += paralysisDamage;
+//            return damage;
+//        }
         return damage;
     }
 

@@ -9,6 +9,7 @@ public class Knight extends Player {
         this.x = x;
         this.y = y;
         this.name = "K";
+        this.overtimeRounds = 0;
     }
 
     @Override
@@ -39,6 +40,9 @@ public class Knight extends Player {
         }
         damage *= Constants.executeKnight;
         double slam;
+        knight.canMove = false;
+        knight.overtimeDamage = 0;
+        knight.overtimeRounds = 1;
         slam = Constants.slam + Constants.slamBonus * knight.getLevel();
         slam *= Constants.slamKnight;
         damage += slam;
@@ -65,6 +69,9 @@ public class Knight extends Player {
         }
         damage *= Constants.executePyromancer;
         double slam;
+        pyromancer.canMove = false;
+        pyromancer.overtimeDamage = 0;
+        pyromancer.overtimeRounds = 1;
         slam = Constants.slam + Constants.slamBonus * pyromancer.getLevel();
         slam *= Constants.slamPyromancer;
         damage += slam;
@@ -85,15 +92,21 @@ public class Knight extends Player {
             maxProcent = 0.4f;
         }
         hpLimit = Constants.procentHp * teoreticMaxHp + maxProcent;
+
         if (rogue.getHp() < hpLimit) {
             damage = rogue.getHp();
             return damage;
         }
+
         damage *= Constants.executeRogue;
         double slam;
+        rogue.canMove = false;
+        rogue.overtimeDamage = 0;
+        rogue.overtimeRounds = 1;
         slam = Constants.slam + Constants.slamBonus * rogue.getLevel();
         slam *= Constants.slamRogue;
         damage += slam;
+        damage = Math.round(damage);
         if (landType == 'L') {
             damage *= 1.15;
         }
@@ -117,6 +130,9 @@ public class Knight extends Player {
         }
         damage *= Constants.executeWizard;
         double slam;
+        wizard.canMove = false;
+        wizard.overtimeDamage = 0;
+        wizard.overtimeRounds = 1;
         slam = Constants.slam + Constants.slamBonus * wizard.getLevel();
         slam *= Constants.slamWizard;
         damage += slam;

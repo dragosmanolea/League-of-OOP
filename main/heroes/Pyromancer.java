@@ -12,6 +12,7 @@ public class Pyromancer extends Player {
         this.y = y;
         this.name = "P";
         currentRound = 0;
+        this.overtimeRounds = 0;
     }
 
 
@@ -31,11 +32,13 @@ public class Pyromancer extends Player {
         knight.overtimeRounds = 2;
         knight.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * knight.getLevel());
         knight.overtimeDamage *= Constants.igniteKnight;
+        Math.round(knight.overtimeDamage);
         igniteDamage *= Constants.igniteKnight;
         damage += igniteDamage;
-//        if (landType == 'V') {
-//            damage *= 1.25f;
-//        }
+        if (landType == 'V') {
+            damage *= 1.25f;
+        }
+//        System.out.println("Damage dat de pyromancer pe knight:" + damage);
         return damage;
     }
 
@@ -49,11 +52,13 @@ public class Pyromancer extends Player {
         pyromancer.overtimeRounds = 2;
         pyromancer.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * pyromancer.getLevel());
         pyromancer.overtimeDamage *= Constants.ignitePyromancer;
+        Math.round(pyromancer.overtimeDamage);
+
         igniteDamage *= Constants.ignitePyromancer;
         damage += igniteDamage;
-//        if (landType == 'V') {
-//            damage *= 1.25f;
-//        }
+        if (landType == 'V') {
+            damage *= 1.25f;
+        }
         return damage;
     }
 
@@ -67,11 +72,13 @@ public class Pyromancer extends Player {
         rogue.overtimeRounds = 2;
         rogue.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * rogue.getLevel());
         rogue.overtimeDamage *= Constants.igniteRogue;
+        Math.round(rogue.overtimeDamage);
+
         igniteDamage *= Constants.igniteRogue;
         damage += igniteDamage;
-//        if (landType == 'V') {
-//            damage *= 1.25f;
-//        }
+        if (landType == 'V') {
+            damage *= 1.25f;
+        }
         return damage;
     }
 
@@ -85,11 +92,12 @@ public class Pyromancer extends Player {
         wizard.overtimeRounds = 2;
         wizard.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * wizard.getLevel());
         wizard.overtimeDamage *= Constants.igniteWizard;
+        Math.round(wizard.overtimeDamage);
         igniteDamage *= Constants.igniteWizard;
         damage += igniteDamage;
-//        if (landType == 'V') {
-//            damage *= 1.25f;
-//        }
+        if (landType == 'V') {
+            damage *= 1.25f;
+        }
         return damage;
     }
 

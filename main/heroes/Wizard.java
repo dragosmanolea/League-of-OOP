@@ -9,6 +9,7 @@ public class Wizard extends Player {
         this.x = x;
         this.y = y;
         this.name = "W";
+        this.overtimeRounds = 0;
     }
 
     @Override

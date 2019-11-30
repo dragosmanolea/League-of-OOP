@@ -9,7 +9,7 @@ public abstract class Player {
     protected int damage;
     protected int x;
     protected int y;
-    protected int overtimeRounds;
+    public int overtimeRounds;
     protected double overtimeDamage;
     protected boolean fight;
     protected String name;
@@ -30,17 +30,19 @@ public abstract class Player {
         return fight;
     }
 
-    public void checkOvertime(Player source) {
+    public void checkOvertime() {
+//        System.out.println(hp + " in functie" + this.getName());
         if (overtimeRounds > 0) {
             hp -= overtimeDamage;
         }
-        overtimeRounds--;
+//        System.out.println(hp + " in functie" + this.getName());
+        overtimeRounds = overtimeRounds - 1;
         if (overtimeRounds == 0) {
             canMove = true;
         }
-        if (this.hp <= 0) {
-            source.addXp(this);
-        }
+//        if (this.hp <= 0) {
+//            source.addXp(this);
+//        }
     }
 
     public void setFight() {
