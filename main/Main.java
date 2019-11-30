@@ -85,12 +85,12 @@ public class Main {
             }
             for (Player it : players) {
                 it.resetFight();
+                it.checkOvertime();
             }
             int X, Y;
             double firstDamage = 0;
             double secondDamage = 0;
             for (int j = 0; j < p; ++j) {
-                players.get(j).checkOvertime();
                 for (Player it : players) {
                     if (!players.get(j).equals(it)) {
                         X = players.get(j).getX();
@@ -146,24 +146,23 @@ public class Main {
 //                            System.out.println(players.get(j).getName() + " " + players.get(j).getHp());
                         }
                     }
-//                    it.checkOvertime();
-
                 }
             }
+
         }
 
         // update positions arraylist
-        for (int i = 0; i < p; ++i) {
-            for (int j = 1; j <= 2; ++j) {
-                if (j % 2 == 1) {
-                    positions.get(i).remove(1);
-                    positions.get(i).add(1, Integer.toString(players.get(i).getX()));
-                } else {
-                    positions.get(i).remove(2);
-                    positions.get(i).add(2, Integer.toString(players.get(i).getY()));
-                }
-            }
-        }
+//        for (int i = 0; i < p; ++i) {
+//            for (int j = 1; j <= 2; ++j) {
+//                if (j % 2 == 1) {
+//                    positions.get(i).remove(1);
+//                    positions.get(i).add(1, Integer.toString(players.get(i).getX()));
+//                } else {
+//                    positions.get(i).remove(2);
+//                    positions.get(i).add(2, Integer.toString(players.get(i).getY()));
+//                }
+//            }
+//        }
 
 //        System.out.println("*************************************");
         String filename = args[1];

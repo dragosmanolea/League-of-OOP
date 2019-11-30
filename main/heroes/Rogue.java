@@ -46,10 +46,6 @@ public class Rogue extends Player {
             damage *= 1.15f;
             damage = Math.round(damage);
         }
-//        if (knight.overtimeRounds == 3 || knight.overtimeRounds == 6) {
-//            damage += paralysisDamage;
-//            return damage;
-//        }
         backstab++;
         damage = Math.round(damage);
         return damage;
@@ -57,28 +53,31 @@ public class Rogue extends Player {
 
     @Override
     public double attack(Pyromancer pyromancer, char landType) {
-        double damage = 200 + 20 * pyromancer.getLevel();
         // backstab
-        backstab++;
-        if (backstab % 3 == 0) {
+        double damage = 200 + 20 * pyromancer.getLevel();
+        // paralysis
+        if ((backstab % 3 ) == 0 && landType == 'W') {
             damage *= 1.5;
         }
-        damage += damage * 0.25f;
-        // paralysis
+        damage *= 1.25f;
+        damage = Math.round(damage);
         double paralysisDamage;
         pyromancer.canMove = false;
-        pyromancer.overtimeDamage = 40 + 10 * pyromancer.getLevel();
-        pyromancer.overtimeDamage *= 1.20;
+        paralysisDamage = 40 + 10 * pyromancer.getLevel();
+        paralysisDamage *= 1.20f;
+        paralysisDamage = Math.round(paralysisDamage);
+        pyromancer.overtimeDamage = paralysisDamage;
+        Math.round(pyromancer.overtimeDamage);
         pyromancer.overtimeRounds = 3;
+        damage += paralysisDamage;
+        damage = Math.round(damage);
         if (landType == 'W') {
             pyromancer.overtimeRounds = 6;
-        }
-        if (landType == 'W') {
             damage *= 1.15f;
+            damage = Math.round(damage);
         }
-        paralysisDamage = 40 + 10 * pyromancer.getLevel();
-        paralysisDamage *= 1.25f;
-        damage += paralysisDamage;
+        backstab++;
+        damage = Math.round(damage);
         return damage;
     }
 

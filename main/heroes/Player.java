@@ -32,8 +32,9 @@ public abstract class Player {
 
     public void checkOvertime() {
 //        System.out.println(hp + " in functie" + this.getName());
-        if (overtimeRounds > 0) {
+        if (overtimeRounds > 0 && hp > 0) {
             hp -= overtimeDamage;
+            hp = Math.round(hp);
         }
 //        System.out.println(hp + " in functie" + this.getName());
         overtimeRounds = overtimeRounds - 1;
