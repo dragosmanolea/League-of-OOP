@@ -2,12 +2,10 @@ package main.heroes;
 
 public class Pyromancer extends Player {
 //    public final String name;
-    private float initialHp = 500;
-    private int bonusHpPerLevel = 50;
     private int bonusDamagePerLevel = 50;
     private int currentRound;
     public Pyromancer(int x, int y) {
-        this.hp = initialHp;
+        this.hp = Constants.PYROMANCER_HP;
         this.x = x;
         this.y = y;
         this.name = "P";
@@ -25,15 +23,15 @@ public class Pyromancer extends Player {
     @Override
     public float attack(Knight knight, char landType) {
         float damage;
-        damage = Constants.fireblast + knight.getLevel() * Constants.fireblastBonus;
-        damage *= Constants.fireblastKnight;
+        damage = Constants.FIREBLAST + knight.getLevel() * Constants.FIREBLAST_BONUS;
+        damage *= Constants.FIREBLAST_KNIGHT;
         float igniteDamage;
-        igniteDamage = Constants.ignite + knight.getLevel() * Constants.igniteBonus;
+        igniteDamage = Constants.IGNITE + knight.getLevel() * Constants.IGNITE_BONUS;
         knight.overtimeRounds = 2;
-        knight.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * knight.getLevel());
-        knight.overtimeDamage *= Constants.igniteKnight;
+        knight.overtimeDamage = Constants.IGNITE_OVERTIME + (Constants.IGNITE_OVERTIME_BONUS * knight.getLevel());
+        knight.overtimeDamage *= Constants.IGNITE_KNIGHT;
         Math.round(knight.overtimeDamage);
-        igniteDamage *= Constants.igniteKnight;
+        igniteDamage *= Constants.IGNITE_KNIGHT;
         damage += igniteDamage;
         if (landType == 'V') {
             damage *= 1.25f;
@@ -45,16 +43,16 @@ public class Pyromancer extends Player {
     @Override
     public float attack(Pyromancer pyromancer, char landType) {
         float damage;
-        damage = Constants.fireblast + pyromancer.getLevel() * Constants.fireblastBonus;
-        damage *= Constants.fireblastPyromancer;
+        damage = Constants.FIREBLAST + pyromancer.getLevel() * Constants.FIREBLAST_BONUS;
+        damage *= Constants.FIREBLAST_PYROMANCER;
         float igniteDamage;
-        igniteDamage = Constants.ignite + pyromancer.getLevel() * Constants.igniteBonus;
+        igniteDamage = Constants.IGNITE + pyromancer.getLevel() * Constants.IGNITE_BONUS;
         pyromancer.overtimeRounds = 2;
-        pyromancer.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * pyromancer.getLevel());
-        pyromancer.overtimeDamage *= Constants.ignitePyromancer;
+        pyromancer.overtimeDamage = Constants.IGNITE_OVERTIME + (Constants.IGNITE_OVERTIME_BONUS * pyromancer.getLevel());
+        pyromancer.overtimeDamage *= Constants.IGNITE_PYROMANCER;
         Math.round(pyromancer.overtimeDamage);
 
-        igniteDamage *= Constants.ignitePyromancer;
+        igniteDamage *= Constants.IGNITE_PYROMANCER;
         damage += igniteDamage;
         if (landType == 'V') {
             damage *= 1.25f;
@@ -65,16 +63,16 @@ public class Pyromancer extends Player {
     @Override
     public float attack(Rogue rogue, char landType) {
         float damage;
-        damage = Constants.fireblast + rogue.getLevel() * Constants.fireblastBonus;
-        damage *= Constants.fireblastRogue;
+        damage = Constants.FIREBLAST + rogue.getLevel() * Constants.FIREBLAST_BONUS;
+        damage *= Constants.FIREBLAST_ROGUE;
         float igniteDamage;
-        igniteDamage = Constants.ignite + rogue.getLevel() * Constants.igniteBonus;
+        igniteDamage = Constants.IGNITE + rogue.getLevel() * Constants.IGNITE_BONUS;
         rogue.overtimeRounds = 2;
-        rogue.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * rogue.getLevel());
-        rogue.overtimeDamage *= Constants.igniteRogue;
+        rogue.overtimeDamage = Constants.IGNITE_OVERTIME + (Constants.IGNITE_OVERTIME_BONUS * rogue.getLevel());
+        rogue.overtimeDamage *= Constants.IGNITE_ROGUE;
         Math.round(rogue.overtimeDamage);
 
-        igniteDamage *= Constants.igniteRogue;
+        igniteDamage *= Constants.IGNITE_ROGUE;
         damage += igniteDamage;
         if (landType == 'V') {
             damage *= 1.25f;
@@ -85,15 +83,15 @@ public class Pyromancer extends Player {
     @Override
     public float attack(Wizard wizard, char landType) {
         float damage;
-        damage = Constants.fireblast + wizard.getLevel() * Constants.fireblastBonus;
-        damage *= Constants.fireblastWizard;
+        damage = Constants.FIREBLAST + wizard.getLevel() * Constants.FIREBLAST_BONUS;
+        damage *= Constants.FIREBLAST_WIZARD;
         float igniteDamage;
-        igniteDamage = Constants.ignite + wizard.getLevel() * Constants.igniteBonus;
+        igniteDamage = Constants.IGNITE + wizard.getLevel() * Constants.IGNITE_BONUS;
         wizard.overtimeRounds = 2;
-        wizard.overtimeDamage = Constants.igniteOvertime + (Constants.igniteOvertimeBonus * wizard.getLevel());
-        wizard.overtimeDamage *= Constants.igniteWizard;
+        wizard.overtimeDamage = Constants.IGNITE_OVERTIME + (Constants.IGNITE_OVERTIME_BONUS * wizard.getLevel());
+        wizard.overtimeDamage *= Constants.IGNITE_WIZARD;
         Math.round(wizard.overtimeDamage);
-        igniteDamage *= Constants.igniteWizard;
+        igniteDamage *= Constants.IGNITE_WIZARD;
         damage += igniteDamage;
         if (landType == 'V') {
             damage *= 1.25f;
@@ -110,7 +108,7 @@ public class Pyromancer extends Player {
         this.xp = xp + Math.max(0, 200 - (this.level - loser.level) * 40);
         if (this.xp > (250 + level * 50)) {
             level++;
-            this.hp = initialHp + bonusHpPerLevel * level;
+            this.hp = Constants.PYROMANCER_HP + Constants.PYROMANCER_HP_PER_LEVEL * level;
         }
     }
 }

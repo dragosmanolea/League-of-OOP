@@ -28,7 +28,7 @@ public class Wizard extends Player {
         procentFirstSkill = 0.2f + 0.05f * this.getLevel();
         float baseHp;
         float damageReceived;
-        float opponentMaxHp = Constants.knightHp + Constants.knightHpPerLevel * knight.getLevel();
+        float opponentMaxHp = Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * knight.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, knight.getHp());
         procentFirstSkill *= Constants.drainKnight;
         firstSkill = procentFirstSkill * baseHp;
@@ -47,7 +47,7 @@ public class Wizard extends Player {
         if (maxProcent > 0.4f) {
             maxProcent = 0.4f;
         }
-        hpLimit = Constants.procentHp * teoreticMaxHp + maxProcent;
+        hpLimit = Constants.PROCENT_HP * teoreticMaxHp + maxProcent;
 //        System.out.println(hpLimit);
         if (this.getHp() < hpLimit) {
             damageFromKnight = this.getHp();
@@ -56,8 +56,8 @@ public class Wizard extends Player {
         }
 //        System.out.println("Pe aici ajunge?");
 
-        damageReceived = Constants.execute + Constants.executeBonus * this.level;
-        damageReceived += Constants.slam + Constants.slamBonus * this.level;
+        damageReceived = Constants.EXECUTE + Constants.EXECUTE_BONUS * this.level;
+        damageReceived += Constants.SLAM + Constants.SLAM_BONUS * this.level;
         if (landType == 'L') {
             damageReceived *= 1.15f;
         }
@@ -95,7 +95,7 @@ public class Wizard extends Player {
 
         float baseHp;
         float damageReceived;
-        float opponentMaxHp = Constants.pyromancerHp + Constants.pyromancerHpPerLevel * pyromancer.getLevel();
+        float opponentMaxHp = Constants.PYROMANCER_HP + Constants.PYROMANCER_HP_PER_LEVEL * pyromancer.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, pyromancer.getHp());
         procentFirstSkill *= Constants.drainPyormancer;
         firstSkill = procentFirstSkill * baseHp;
@@ -106,8 +106,8 @@ public class Wizard extends Player {
         // deflect
         float damageDeflect;
 
-        damageReceived = Constants.fireblast + Constants.fireblastBonus * pyromancer.level;
-        damageReceived += Constants.ignite + Constants.ignite * pyromancer.level;
+        damageReceived = Constants.FIREBLAST + Constants.FIREBLAST_BONUS * pyromancer.level;
+        damageReceived += Constants.IGNITE + Constants.IGNITE * pyromancer.level;
         if (landType == 'V') {
             damageReceived *= 1.25f;
         }
@@ -142,7 +142,7 @@ public class Wizard extends Player {
 
         float baseHp;
         float damageReceived;
-        float opponentMaxHp = Constants.rogueHp + Constants.rogueHpPerLevel * rogue.getLevel();
+        float opponentMaxHp = Constants.ROGUE_HP + Constants.ROGUE_HP_PER_LEVEL * rogue.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, rogue.getHp());
         procentFirstSkill *= Constants.drainRogue;
         firstSkill = procentFirstSkill * baseHp;
@@ -153,12 +153,12 @@ public class Wizard extends Player {
         // deflect
         float damageDeflect;
 
-        damageReceived = Constants.backstab + Constants.backstabBonus * rogue.level;
+        damageReceived = Constants.BACKSTAB + Constants.BACKSTAB_BONUS * rogue.level;
         if (landType == 'W') {
             damageReceived *= 1.5f;
         }
 
-        damageReceived += Constants.paralysis + Constants.paralysisBonus * rogue.level;
+        damageReceived += Constants.PARALYSIS + Constants.PARALYSIS_BONUS * rogue.level;
 
         if (landType == 'W') {
             damageReceived *= 1.15f;
