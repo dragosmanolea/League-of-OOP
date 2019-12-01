@@ -1,10 +1,7 @@
 package main.heroes;
 
-public class Knight extends Player {
-//    public final String name;
-    private int bonusHpPerLevel = 80;
-    private float initialHp = 900;
-    public Knight(int x, int y) {
+public final class Knight extends Player {
+    public Knight(final int x, final int y) {
         this.hp = Constants.KNIGHT_HP;
         this.x = x;
         this.y = y;
@@ -13,21 +10,22 @@ public class Knight extends Player {
     }
 
     @Override
-    public float isAttackedBy(Player player, char landType) {
+    public float isAttackedBy(final Player player, final char landType) {
         float firstDamage = player.attack(this, landType);
         firstDamage = Math.round(firstDamage);
         return firstDamage;
     }
 
     @Override
-    public float attack(Knight knight, char landType) {
+    public float attack(final Knight knight, final char landType) {
         float damage;
         damage = Constants.EXECUTE + Constants.EXECUTE_BONUS * knight.getLevel();
         float hpLimit;
-        float teoreticMaxHp = knight.getHp() + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * knight.getLevel();
-        float maxProcent = 0.01f * knight.getLevel();
-        if (maxProcent > 0.4f) {
-            maxProcent = 0.4f;
+        float teoreticMaxHp = knight.getHp()
+                + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * knight.getLevel();
+        float maxProcent = Constants.PROCENTAGE * knight.getLevel();
+        if (maxProcent > Constants.MAX_PROCENTAGE) {
+            maxProcent = Constants.MAX_PROCENTAGE;
         }
         hpLimit = Constants.PROCENT_HP * teoreticMaxHp + maxProcent;
         if (knight.getHp() < hpLimit) {
@@ -38,25 +36,28 @@ public class Knight extends Player {
         float slam;
         knight.canMove = false;
         knight.overtimeDamage = 0;
-        knight.overtimeRounds = 1;
+        knight.overtimeRounds = Constants.OVERTIME_ROUNDS_KNIGHT;
         slam = Constants.SLAM + Constants.SLAM_BONUS * knight.getLevel();
         slam *= Constants.SLAM_KNIGHT;
         damage += slam;
         if (landType == 'L') {
-            damage *= 1.15;
+            damage *= Constants.KNIGHT_LAND_BONUS;
         }
         return damage;
     }
 
     @Override
-    public float attack(Pyromancer pyromancer, char landType) {
+    public float attack(final Pyromancer pyromancer, final char landType) {
         float damage;
-        damage = Constants.EXECUTE + Constants.EXECUTE_BONUS * pyromancer.getLevel();
+        damage = Constants.EXECUTE
+                + Constants.EXECUTE_BONUS * pyromancer.getLevel();
         float hpLimit;
-        float teoreticMaxHp = pyromancer.getHp() + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * pyromancer.getLevel();
-        float maxProcent = 0.01f * pyromancer.getLevel();
-        if (maxProcent > 0.4f) {
-            maxProcent = 0.4f;
+        float teoreticMaxHp = pyromancer.getHp()
+                + Constants.KNIGHT_HP
+                + Constants.KNIGHT_HP_PER_LEVEL * pyromancer.getLevel();
+        float maxProcent = Constants.PROCENTAGE * pyromancer.getLevel();
+        if (maxProcent > Constants.MAX_PROCENTAGE) {
+            maxProcent = Constants.MAX_PROCENTAGE;
         }
         hpLimit = Constants.PROCENT_HP * teoreticMaxHp + maxProcent;
         if (pyromancer.getHp() < hpLimit) {
@@ -67,25 +68,26 @@ public class Knight extends Player {
         float slam;
         pyromancer.canMove = false;
         pyromancer.overtimeDamage = 0;
-        pyromancer.overtimeRounds = 1;
+        pyromancer.overtimeRounds = Constants.OVERTIME_ROUNDS_KNIGHT;
         slam = Constants.SLAM + Constants.SLAM_BONUS * pyromancer.getLevel();
         slam *= Constants.SLAM_PYROMANCER;
         damage += slam;
         if (landType == 'L') {
-            damage *= 1.15;
+            damage *= Constants.KNIGHT_LAND_BONUS;
         }
         return damage;
     }
 
     @Override
-    public float attack(Rogue rogue, char landType) {
+    public float attack(final Rogue rogue, final char landType) {
         float damage;
         damage = Constants.EXECUTE + Constants.EXECUTE_BONUS * rogue.getLevel();
         float hpLimit;
-        float teoreticMaxHp = rogue.getHp() + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * rogue.getLevel();
-        float maxProcent = 0.01f * rogue.getLevel();
-        if (maxProcent > 0.4f) {
-            maxProcent = 0.4f;
+        float teoreticMaxHp = rogue.getHp()
+                + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * rogue.getLevel();
+        float maxProcent = Constants.PROCENTAGE * rogue.getLevel();
+        if (maxProcent > Constants.MAX_PROCENTAGE) {
+            maxProcent = Constants.MAX_PROCENTAGE;
         }
         hpLimit = Constants.PROCENT_HP * teoreticMaxHp + maxProcent;
 
@@ -98,26 +100,27 @@ public class Knight extends Player {
         float slam;
         rogue.canMove = false;
         rogue.overtimeDamage = 0;
-        rogue.overtimeRounds = 1;
+        rogue.overtimeRounds = Constants.OVERTIME_ROUNDS_KNIGHT;
         slam = Constants.SLAM + Constants.SLAM_BONUS * rogue.getLevel();
         slam *= Constants.SLAM_ROGUE;
         damage += slam;
         damage = Math.round(damage);
         if (landType == 'L') {
-            damage *= 1.15;
+            damage *= Constants.KNIGHT_LAND_BONUS;
         }
         return damage;
     }
 
     @Override
-    public float attack(Wizard wizard, char landType) {
+    public float attack(final Wizard wizard, final char landType) {
         float damage;
         damage = Constants.EXECUTE + Constants.EXECUTE_BONUS * wizard.getLevel();
         float hpLimit;
-        float teoreticMaxHp = wizard.getHp() + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * wizard.getLevel();
-        float maxProcent = 0.01f * wizard.getLevel();
-        if (maxProcent > 0.4f) {
-            maxProcent = 0.4f;
+        float teoreticMaxHp = wizard.getHp()
+                + Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * wizard.getLevel();
+        float maxProcent = Constants.PROCENTAGE * wizard.getLevel();
+        if (maxProcent > Constants.MAX_PROCENTAGE) {
+            maxProcent = Constants.MAX_PROCENTAGE;
         }
         hpLimit = Constants.PROCENT_HP * teoreticMaxHp + maxProcent;
         if (wizard.getHp() < hpLimit) {
@@ -128,15 +131,13 @@ public class Knight extends Player {
         float slam;
         wizard.canMove = false;
         wizard.overtimeDamage = 0;
-        wizard.overtimeRounds = 1;
+        wizard.overtimeRounds = Constants.OVERTIME_ROUNDS_KNIGHT;
         slam = Constants.SLAM + Constants.SLAM_BONUS * wizard.getLevel();
         slam *= Constants.SLAM_WIZARD;
-//        System.out.println("Damage knight-wizard:" + damage * 1.15f + ":" + slam * 1.15f);
         damage += slam;
         if (landType == 'L') {
-            damage *= 1.15f;
+            damage *= Constants.KNIGHT_LAND_BONUS;
         }
-//        System.out.println("Damage knight-wizard:" + damage);
         return damage;
     }
 
@@ -146,11 +147,12 @@ public class Knight extends Player {
     }
 
 
-    public void addXp(Player loser) {
-        this.xp = xp + Math.max(0, 200 - (this.level - loser.level) * 40);
-        if (this.xp > (250 + level * 50)) {
+    public void addXp(final Player loser) {
+        this.xp = xp + Math.max(0, Constants.DOUA_SUTE
+                - (this.level - loser.level) * Constants.PATRUZECI);
+        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
             level++;
-            this.hp = 900 + 80 * level;
+            this.hp = Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * level;
         }
     }
 }

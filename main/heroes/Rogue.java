@@ -1,9 +1,8 @@
 package main.heroes;
 
-public class Rogue extends Player {
-//    public final String name;
+public final class Rogue extends Player {
     private int backstab;
-    public Rogue(int x, int y) {
+    public Rogue(final int x, final int y) {
         this.hp = Constants.ROGUE_HP;
         this.x = x;
         this.y = y;
@@ -12,41 +11,37 @@ public class Rogue extends Player {
         this.overtimeRounds = 0;
     }
 
-    public int getBackstab() {
-        return backstab;
-    }
-
     @Override
-    public float isAttackedBy(Player player, char landType) {
+    public float isAttackedBy(final Player player, final char landType) {
         float damage = player.attack(this, landType);
         damage = Math.round(damage);
         return damage;
     }
 
     @Override
-    public float attack(Knight knight, char landType) {
+    public float attack(final Knight knight, final char landType) {
         // backstab
         float damage = Constants.BACKSTAB + Constants.BACKSTAB_BONUS * knight.getLevel();
-        // paralysis
-        damage *= 0.9f;
+        damage *= Constants.BACKSTAB_KNIGHT;
         if (landType == 'W') {
-            damage *= 1.15f;
+            damage *= Constants.ROGUE_LAND_BONUS;
         }
-        if ((backstab % 3) == 0 && landType == 'W') {
-            damage *= 1.5f;
+        if ((backstab % Constants.TREI) == 0 && landType == 'W') {
+            damage *= Constants.ROGUE_CRITICAL;
         }
         damage = Math.round(damage);
+        // paralysis
         float paralysisDamage;
         knight.canMove = false;
 
         paralysisDamage = Constants.PARALYSIS + Constants.PARALYSIS_BONUS * knight.getLevel();
-        paralysisDamage *=  0.8f;
+        paralysisDamage *=  Constants.PARALYSIS_KNIGHT;
         paralysisDamage = Math.round(paralysisDamage);
         Math.round(knight.overtimeDamage);
-        knight.overtimeRounds = 3;
+        knight.overtimeRounds = Constants.TREI;
         if (landType == 'W') {
-            knight.overtimeRounds = 6;
-            paralysisDamage *= 1.15f;
+            knight.overtimeRounds = Constants.SASE;
+            paralysisDamage *= Constants.ROGUE_LAND_BONUS;
         }
         knight.overtimeDamage = paralysisDamage;
         damage += paralysisDamage;
@@ -57,29 +52,29 @@ public class Rogue extends Player {
     }
 
     @Override
-    public float attack(Pyromancer pyromancer, char landType) {
+    public float attack(final Pyromancer pyromancer, final char landType) {
         // backstab
         float damage = Constants.BACKSTAB + Constants.BACKSTAB_BONUS * pyromancer.getLevel();
-        // paralysis
-        damage *= 1.25f;
+        damage *= Constants.BACKSTAB_PYROMANCER;
         if (landType == 'W') {
-            damage *= 1.15f;
+            damage *= Constants.ROGUE_LAND_BONUS;
         }
-        if ((backstab % 3) == 0 && landType == 'W') {
-            damage *= 1.5f;
+        if ((backstab % Constants.TREI) == 0 && landType == 'W') {
+            damage *= Constants.ROGUE_CRITICAL;
         }
         damage = Math.round(damage);
+        // paralysis
         float paralysisDamage;
         pyromancer.canMove = false;
 
         paralysisDamage = Constants.PARALYSIS + Constants.PARALYSIS_BONUS * pyromancer.getLevel();
-        paralysisDamage *=  1.2f;
+        paralysisDamage *=  Constants.PARALYSIS_PYROMANCER;
         paralysisDamage = Math.round(paralysisDamage);
         Math.round(pyromancer.overtimeDamage);
-        pyromancer.overtimeRounds = 3;
+        pyromancer.overtimeRounds = Constants.TREI;
         if (landType == 'W') {
-            pyromancer.overtimeRounds = 6;
-            paralysisDamage *= 1.15f;
+            pyromancer.overtimeRounds = Constants.SASE;
+            paralysisDamage *= Constants.ROGUE_LAND_BONUS;
         }
         pyromancer.overtimeDamage = paralysisDamage;
         damage += paralysisDamage;
@@ -90,29 +85,29 @@ public class Rogue extends Player {
     }
 
     @Override
-    public float attack(Rogue rogue, char landType) {
+    public float attack(final Rogue rogue, final char landType) {
         // backstab
         float damage = Constants.BACKSTAB + Constants.BACKSTAB_BONUS * rogue.getLevel();
-        // paralysis
-        damage *= 1.2f;
+        damage *= Constants.BACKSTAB_ROGUE;
         if (landType == 'W') {
-            damage *= 1.15f;
+            damage *= Constants.ROGUE_LAND_BONUS;
         }
-        if ((backstab % 3) == 0 && landType == 'W') {
-            damage *= 1.5f;
+        if ((backstab % Constants.TREI) == 0 && landType == 'W') {
+            damage *= Constants.ROGUE_CRITICAL;
         }
         damage = Math.round(damage);
+        // paralysis
         float paralysisDamage;
         rogue.canMove = false;
 
         paralysisDamage = Constants.PARALYSIS + Constants.PARALYSIS_BONUS * rogue.getLevel();
-        paralysisDamage *=  0.9f;
+        paralysisDamage *=  Constants.PARALYSIS_ROGUE;
         paralysisDamage = Math.round(paralysisDamage);
         Math.round(rogue.overtimeDamage);
-        rogue.overtimeRounds = 3;
+        rogue.overtimeRounds = Constants.TREI;
         if (landType == 'W') {
-            rogue.overtimeRounds = 6;
-            paralysisDamage *= 1.15f;
+            rogue.overtimeRounds = Constants.SASE;
+            paralysisDamage *= Constants.ROGUE_LAND_BONUS;
         }
         rogue.overtimeDamage = paralysisDamage;
         damage += paralysisDamage;
@@ -123,29 +118,29 @@ public class Rogue extends Player {
     }
 
     @Override
-    public float attack(Wizard wizard, char landType) {
+    public float attack(final Wizard wizard, final char landType) {
         // backstab
         float damage = Constants.BACKSTAB + Constants.BACKSTAB_BONUS * wizard.getLevel();
-        // paralysis
-        damage *= 1.25f;
+        damage *= Constants.BACKSTAB_WIZARD;
         if (landType == 'W') {
-            damage *= 1.15f;
+            damage *= Constants.ROGUE_LAND_BONUS;
         }
-        if ((backstab % 3) == 0 && landType == 'W') {
-            damage *= 1.5f;
+        if ((backstab % Constants.TREI) == 0 && landType == 'W') {
+            damage *= Constants.ROGUE_CRITICAL;
         }
         damage = Math.round(damage);
+        // paralysis
         float paralysisDamage;
         wizard.canMove = false;
 
         paralysisDamage = Constants.PARALYSIS + Constants.PARALYSIS_BONUS * wizard.getLevel();
-        paralysisDamage *=  1.25f;
+        paralysisDamage *=  Constants.PARALYSIS_WIZARD;
         paralysisDamage = Math.round(paralysisDamage);
         Math.round(wizard.overtimeDamage);
-        wizard.overtimeRounds = 3;
+        wizard.overtimeRounds = Constants.TREI;
         if (landType == 'W') {
-            wizard.overtimeRounds = 6;
-            paralysisDamage *= 1.15f;
+            wizard.overtimeRounds = Constants.SASE;
+            paralysisDamage *= Constants.ROGUE_LAND_BONUS;
         }
         wizard.overtimeDamage = paralysisDamage;
         damage += paralysisDamage;
@@ -161,10 +156,10 @@ public class Rogue extends Player {
         return name + " " + x + " " + y;
     }
 
-    public void addXp(Player loser) {
-//        System.out.println("adaug xp");
-        this.xp = xp + (int) Math.max(0, 200 - (this.level - loser.level) * Constants.PARALYSIS);
-        if (this.xp > (250 + level * 50)) {
+    public void addXp(final Player loser) {
+        this.xp = xp
+                + Math.max(0, Constants.DOUA_SUTE - (this.level - loser.level) * Constants.PATRUZECI);
+        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
             level++;
             this.hp = Constants.ROGUE_HP + Constants.ROGUE_HP_PER_LEVEL * level;
         }

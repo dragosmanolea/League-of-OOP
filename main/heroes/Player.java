@@ -3,124 +3,103 @@ package main.heroes;
 public abstract class Player {
     protected int xp = 0;
     protected float hp;
-    protected int maxHp;
     protected int level = 0;
     protected int xpLevelUp;
-    protected int damage;
     protected int x;
     protected int y;
-    public int overtimeRounds;
+    protected int overtimeRounds;
     protected float overtimeDamage;
     protected boolean fight;
     protected String name;
-//    protected float damageReceived;
-    protected boolean canMove;
+    protected boolean canMove = true;
 
-//    public void setDamageReceived(float damage) {
-//        this.damageReceived = damage;
-//    }
-
-    public void setHp(float hp) {
+    public final void setHp(final float hp) {
         this.hp = hp;
     }
 
     public abstract void addXp(Player loser);
 
-    public boolean getFight() {
+    public final boolean getFight() {
         return fight;
     }
 
-    public void checkOvertime() {
-//        System.out.println(hp + " in functie" + this.getName());
+    public final void checkOvertime() {
         if (overtimeRounds > 0 && hp > 0) {
             hp -= overtimeDamage;
             hp = Math.round(hp);
         }
-//        System.out.println(hp + " in functie" + this.getName());
         overtimeRounds = overtimeRounds - 1;
         if (overtimeRounds == 0) {
             canMove = true;
         }
-//        if (this.hp <= 0) {
-//            source.addXp(this);
-//        }
     }
 
-    public void setFight() {
+    public final void setFight() {
         this.fight = true;
     }
-    public void resetFight() {
+    /*
+    * Campul fight e resetat pentru urmatoarea runda, in care va putea lupta
+    * Am facut asta ca sa evit duplicarea luptelor
+    * */
+    public final void resetFight() {
         this.fight = false;
     }
-
-    public int getX() {
+    /*
+    * Returneaza Linia
+    * */
+    public final int getX() {
         return x;
     }
 
-    public int getY() {
+    /*
+    * Returneaza coloana
+    * */
+
+    public final int getY() {
         return y;
     }
 
-    public void moveU() {
-        if (this.canMove == true) {
+    public final void moveU() {
+        if (this.canMove) {
             this.x--;
         }
     }
 
-    public void moveD() {
-        if (this.canMove == true) {
+    public final void moveD() {
+        if (this.canMove) {
             this.x++;
         }
     }
 
-    public void moveL() {
-        if (this.canMove == true) {
+    public final void moveL() {
+        if (this.canMove) {
             this.y--;
         }
     }
 
-    public void moveR() {
-        if (this.canMove == true) {
+    public final void moveR() {
+        if (this.canMove) {
             this.y++;
         }
     }
 
-    public void noMove() { }
+    public final void noMove() { }
 
-    public int getXp() {
+    public final int getXp() {
         return xp;
     }
 
-    public float getHp() {
+    public final float getHp() {
         return hp;
     }
 
-    public int getLevel() {
+    public final int getLevel() {
         return level;
     }
 
-    public int getXpLevelUp() {
-        return xpLevelUp;
-    }
-
-    public String getName() {
+    public final String getName() {
         return name;
     }
-
-
-
-//    public void checkIgniteToTake(int roundsRemained, float modificator) {
-//        int damage;
-//        if (roundsRemained == 3) {
-//            roundsRemained--;
-//            return;
-//        }
-//        if (roundsRemained > 0) {
-//            damage = Constants.
-//            hp -= 50 + 30 * level;
-//            roundsRemained--;
-//        }
-//    }
 
     public abstract float isAttackedBy(Player player, char landType);
     public abstract float attack(Knight knight, char landType);
