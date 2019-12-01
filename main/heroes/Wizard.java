@@ -20,8 +20,61 @@ public class Wizard extends Player {
     }
     @Override
     public float attack(Knight knight, char landType) {
+        // drain
+        float damage, firstSkill, secondSkill;
+        float damageFromKnight;
+        float procentFirstSkill;
+        float procentSecondSkill;
+        procentFirstSkill = 0.2f + 0.05f * this.getLevel();
+        float baseHp;
+        float damageReceived;
+        float opponentMaxHp = Constants.knightHp + Constants.knightHpPerLevel * knight.getLevel();
+        baseHp = (float) Math.min(0.3 * opponentMaxHp, knight.getHp());
+        procentFirstSkill *= Constants.drainKnight;
+        firstSkill = procentFirstSkill * baseHp;
+        firstSkill = Math.round(firstSkill);
+        if (landType == 'D') {
+            firstSkill *= 1.1f;
+        }
+//        firstSkill = Math.round(firstSkill);
+        float damageDeflect;
+        float hpLimit;
+        float teoreticMaxHp = this.getHp() + Constants.wizardHp + Constants.wizardHpPerLevel * this.getLevel();
+        float maxProcent = 0.01f * this.getLevel();
+        if (maxProcent > 0.4f) {
+            maxProcent = 0.4f;
+        }
+        hpLimit = Constants.procentHp * teoreticMaxHp + maxProcent;
+        if (this.getHp() < hpLimit) {
+            damageFromKnight = this.getHp();
+            damageReceived = damageFromKnight;
+            return damageReceived;
+        }
 
-        return 0;
+        damageReceived = Constants.execute + Constants.executeBonus * this.level;
+        damageReceived += Constants.slam + Constants.slamBonus * this.level;
+        if (landType == 'L') {
+            damageReceived *= 1.15f;
+        }
+        procentSecondSkill = 0.35f + (1.02f * knight.getLevel());
+        if (procentSecondSkill > 0.7f) {
+            procentSecondSkill = 0.7f;
+        }
+
+        damageDeflect = procentSecondSkill * damageReceived;
+        damageDeflect = Math.round(damageDeflect);
+        secondSkill = damageDeflect;
+
+        secondSkill *= Constants.deflectKnight;
+        secondSkill = Math.round(secondSkill);
+
+        if (landType == 'D') {
+            secondSkill *= 1.1f;
+        }
+
+        secondSkill = Math.round(secondSkill);
+        damage = firstSkill + secondSkill;
+        return damage;
     }
 
     @Override

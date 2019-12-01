@@ -134,13 +134,13 @@ public class Main {
                             }
 
 
-//                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
-//                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
-//                                    + players.get(j).getX() + " " + players.get(j).getY()));
-//
-//                            System.out.println((it.getName() + " " + it.getLevel()
-//                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
-//                                    + it.getX() + " " + it.getY()));
+                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
+                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
+                                    + players.get(j).getX() + " " + players.get(j).getY()));
+
+                            System.out.println((it.getName() + " " + it.getLevel()
+                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
+                                    + it.getX() + " " + it.getY()));
 
 //                            System.out.println(it.getName() + " " + it.getHp());
 //                            System.out.println(players.get(j).getName() + " " + players.get(j).getHp());
@@ -164,7 +164,7 @@ public class Main {
 //            }
 //        }
 
-//        System.out.println("*************************************");
+        System.out.println("*************************************");
         String filename = args[1];
         try {
             fileio.implementations.FileWriter fileWriter = new fileio.implementations.FileWriter(filename);
