@@ -150,10 +150,16 @@ public final class Knight extends Player {
 
 
     public void addXp(final Player loser) {
+        if (this.getHp() <= 0) {
+            return;
+        }
         this.xp = xp + Math.max(0, Constants.DOUA_SUTE
-                - (this.level - loser.level) * Constants.PATRUZECI);
-        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
-            level += (this.xp - 250) / 50 + 1;
+                - (this.level - loser.level)
+                * Constants.PATRUZECI);
+        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI
+                + level * Constants.CINCIZECI)) {
+            level += (this.xp - Constants.DOUA_SUTE_CINCIZECI)
+                    / Constants.CINCIZECI + Constants.UNU;
             this.hp = this.initialHp + this.bonusHpPerLevel * this.level;
         }
     }

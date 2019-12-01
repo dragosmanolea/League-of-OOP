@@ -1,6 +1,7 @@
 package main.heroes;
 
 public class Constants {
+    public static final int UNU = 1;
     // wizard
     public static final float WIZARD_HP = 400;
     public static final float WIZARD_HP_PER_LEVEL = 30;

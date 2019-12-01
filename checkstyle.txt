@@ -1,21 +1,9 @@
 Starting audit...
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Pyromancer.java:114:33: '250' is a magic number. [MagicNumber]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Pyromancer.java:114:40: '50' is a magic number. [MagicNumber]
 [ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/PlayerCreator.java:2:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Wizard.java:5:16: Variable 'initalHp' must be private and have accessor methods. [VisibilityModifier]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Wizard.java:233:33: '250' is a magic number. [MagicNumber]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Wizard.java:233:40: '50' is a magic number. [MagicNumber]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Rogue.java:165:33: '250' is a magic number. [MagicNumber]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Rogue.java:165:40: '50' is a magic number. [MagicNumber]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Knight.java:156:33: '250' is a magic number. [MagicNumber]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Knight.java:156:40: '50' is a magic number. [MagicNumber]
 [ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/heroes/Constants.java:3:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/Main.java:9:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/Main.java:11:5: Method length is 170 lines (max allowed is 150). [MethodLength]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/Main.java:130: Line is longer than 100 characters (found 108). [LineLength]
-[ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/Main.java:131: Line is longer than 100 characters (found 111). [LineLength]
 [ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/GameInputLoader.java:39:53: '3' is a magic number. [MagicNumber]
 [ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/GameInput.java:18:15: Inner assignments should be avoided. [InnerAssignment]
 [ERROR] /home/dragosmanolea/Desktop/smecherescu/src/main/GameInput.java:19:15: Inner assignments should be avoided. [InnerAssignment]
 Audit done.
-Checkstyle ends with 18 errors.
+Checkstyle ends with 6 errors.

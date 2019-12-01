@@ -2,7 +2,6 @@ package main.heroes;
 
 public final class Wizard extends Player {
 //    public final String name;
-    public int initalHp;
     public Wizard(final int x, final int y) {
         this.hp = Constants.WIZARD_HP;
         this.initialHp = Constants.WIZARD_HP;
@@ -227,10 +226,16 @@ public final class Wizard extends Player {
     }
 
     public void addXp(final Player loser) {
+        if (this.getHp() <= 0) {
+            return;
+        }
         this.xp = xp + Math.max(0, Constants.DOUA_SUTE
-                - (this.level - loser.level) * Constants.PATRUZECI);
-        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
-            level += (this.xp - 250) / 50 + 1;
+                - (this.level - loser.level)
+                * Constants.PATRUZECI);
+        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI
+                + level * Constants.CINCIZECI)) {
+            level += (this.xp - Constants.DOUA_SUTE_CINCIZECI)
+                    / Constants.CINCIZECI + Constants.UNU;
             this.hp = this.initialHp + this.bonusHpPerLevel * this.level;
         }
     }

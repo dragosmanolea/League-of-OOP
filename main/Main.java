@@ -46,7 +46,6 @@ public class Main {
 
         List<String> currMoves = new ArrayList<>();
         String currMove = new String();
-
         for (int i = 0; i < r; ++i) {
             currMoves = moves.get(i);
             currMove = currMoves.get(0);
@@ -93,52 +92,36 @@ public class Main {
                             firstDamage = it.isAttackedBy(players.get(j), map[playerX][playerY]);
                             it.setFight();
 
+                            it.setHp(it.getHp() - firstDamage);
+                            players.get(j).setHp((players.get(j).getHp()
+                                    - secondDamage));
 
-                            if (secondDamage >= players.get(j).getHp()) {
-                                players.get(j).setHp(0);
-                                it.addXp(players.get(j));
-                            }  else {
-                                players.get(j).setHp((players.get(j).getHp()
-                                        - secondDamage));
-                            }
-
-                            if (firstDamage >= it.getHp()) {
+                            if (it.getHp() <= 0) {
                                 it.setHp(0);
                                 players.get(j).addXp(it);
-                            } else {
-                                it.setHp(it.getHp() - firstDamage);
-
                             }
 
-//                            System.out.println(it.getName() + ":" + firstDamage);
-//                            System.out.println(players.get(j).getName() + ":" + secondDamage);
-//
-//                            System.out.println((it.getName() + " " + it.getLevel()
-//                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
-//                                    + it.getX() + " " + it.getY()));
-//
-//
-//                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
-//                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
-//                                    + players.get(j).getX() + " " + players.get(j).getY()));
-//
-//                            System.out.println("Astia de sus s-au batut");
-
-//                            for (Player xxx : players) {
-//                                System.out.println((xxx.getName() + " " + xxx.getLevel()
-//                                        + " " + xxx.getXp() + " " + (int) xxx.getHp() + " "
-//                                        + xxx.getX() + " " + xxx.getY()));
-//                            }
+                            if (players.get(j).getHp() <= 0) {
+                                players.get(j).setHp(0);
+                                it.addXp(players.get(j));
+                            }
                         }
                     }
                 }
             }
-//            System.out.println("___________");
-//            System.out.println(players);
-//            System.out.println("End of round");
+            System.out.println("Round: " + i);
+            for (Player xxx : players) {
+                if (xxx.getHp() <= 0) {
+                    System.out.println(xxx.getName() + " dead");
+                } else {
+                    System.out.println((xxx.getName() + " " + xxx.getLevel()
+                            + " " + xxx.getXp() + " " + (int) xxx.getHp() + " "
+                            + xxx.getX() + " " + xxx.getY()));
+                }
+            }
+            System.out.println("-----------END ROUND--------");
         }
 
-//        System.out.println("*********************");
         String filename = args[1];
         try {
             fileio.implementations.FileWriter fileWriter
