@@ -20,56 +20,13 @@ public class Wizard extends Player {
     }
     @Override
     public float attack(Knight knight, char landType) {
-        float damage, firstSkill, secondSkill;
-        float procentFirstSkill;
-        float procentSecondSkill;
 
-        procentFirstSkill = 0.2f + 0.05f * this.getLevel();
-
-        float baseHp;
-        float damageReceived;
-        float opponentMaxHp = Constants.knightHp + Constants.knightHpPerLevel * knight.getLevel();
-        baseHp = (float) Math.min(0.3 * opponentMaxHp, knight.getHp());
-        procentFirstSkill *= Constants.drainKnight;
-        firstSkill = procentFirstSkill * baseHp;
-        firstSkill = Math.round(firstSkill);
-        if (landType == 'D') {
-            firstSkill *= 1.1f;
-        }
-
-        // deflect
-        float damageDeflect;
-
-        int knightDamage = 0;
-
-        damageReceived = knightDamage + Constants.executeBonus * knight.level;
-        damageReceived += Constants.ignite + Constants.ignite * knight.level;
-        if (landType == 'L') {
-            damageReceived *= 1.15f;
-        }
-        procentSecondSkill = 0.35f + (1.02f * knight.getLevel());
-        if (procentSecondSkill > 0.7f) {
-            procentSecondSkill = 0.7f;
-        }
-
-        damageDeflect = procentSecondSkill * damageReceived;
-        damageDeflect = Math.round(damageDeflect);
-        secondSkill = damageDeflect;
-
-        secondSkill *= Constants.deflectPyromancer;
-        secondSkill = Math.round(secondSkill);
-
-        if (landType == 'D') {
-            secondSkill *= 1.1f;
-        }
-
-        secondSkill = Math.round(secondSkill);
-        damage = firstSkill + secondSkill;
-        return damage;
+        return 0;
     }
 
     @Override
     public float attack(Pyromancer pyromancer, char landType) {
+        // drain
         float damage, firstSkill, secondSkill;
         float procentFirstSkill;
         float procentSecondSkill;
@@ -139,15 +96,15 @@ public class Wizard extends Player {
         float damageDeflect;
 
         damageReceived = Constants.backstab + Constants.backstabBonus * rogue.level;
-        if (rogue.getBackstab() % 3 == 0 && landType == 'W') {
+        if (landType == 'W') {
             damageReceived *= 1.5f;
         }
+
         damageReceived += Constants.paralysis + Constants.paralysisBonus * rogue.level;
 
         if (landType == 'W') {
             damageReceived *= 1.15f;
         }
-
 
         procentSecondSkill = 0.35f + (1.02f * rogue.getLevel());
         if (procentSecondSkill > 0.7f) {
@@ -184,24 +141,6 @@ public class Wizard extends Player {
         firstSkill = procentFirstSkill * baseHp;
         firstSkill = Math.round(firstSkill);
         damage = firstSkill;
-        // deflect
-//        float damageDeflect;
-//        damageReceived = Constants.dra + Constants.fireblastBonus * this.level;
-//        damageReceived += Constants.ignite + Constants.ignite * this.level;
-//        damageDeflect = 0.35f * damageReceived;
-//        damageDeflect = Math.round(damageDeflect);
-//        procentSecondSkill = (0.02f * wizard.getLevel());
-//        if (procentSecondSkill <= 0.7f) {
-//            secondSkill = (procentSecondSkill * damageDeflect +  damageDeflect);
-//        } else {
-//            secondSkill = (0.7f * damageReceived);
-//        }
-//
-//        secondSkill *= Constants.deflectPyromancer;
-//        secondSkill = Math.round(secondSkill);
-//
-//        damage = firstSkill + secondSkill;
-
         if (landType == 'D') {
             damage *= 1.1f;
         }
