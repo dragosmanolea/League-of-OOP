@@ -32,24 +32,29 @@ public class Wizard extends Player {
         baseHp = (float) Math.min(0.3 * opponentMaxHp, knight.getHp());
         procentFirstSkill *= Constants.drainKnight;
         firstSkill = procentFirstSkill * baseHp;
-        firstSkill = Math.round(firstSkill);
+//        firstSkill = Math.round(firstSkill);
         if (landType == 'D') {
             firstSkill *= 1.1f;
         }
-//        firstSkill = Math.round(firstSkill);
+        firstSkill = Math.round(firstSkill);
+//        System.out.println("first skill:" + firstSkill);
         float damageDeflect;
         float hpLimit;
-        float teoreticMaxHp = this.getHp() + Constants.wizardHp + Constants.wizardHpPerLevel * this.getLevel();
+
+        float teoreticMaxHp = Constants.wizardHp + Constants.wizardHpPerLevel * this.getLevel();
+//        System.out.println(teoreticMaxHp);
         float maxProcent = 0.01f * this.getLevel();
         if (maxProcent > 0.4f) {
             maxProcent = 0.4f;
         }
         hpLimit = Constants.procentHp * teoreticMaxHp + maxProcent;
+//        System.out.println(hpLimit);
         if (this.getHp() < hpLimit) {
             damageFromKnight = this.getHp();
             damageReceived = damageFromKnight;
             return damageReceived;
         }
+//        System.out.println("Pe aici ajunge?");
 
         damageReceived = Constants.execute + Constants.executeBonus * this.level;
         damageReceived += Constants.slam + Constants.slamBonus * this.level;
@@ -73,7 +78,9 @@ public class Wizard extends Player {
         }
 
         secondSkill = Math.round(secondSkill);
+//        System.out.println(secondSkill);
         damage = firstSkill + secondSkill;
+//        System.out.println("Wizard -> knight:" + firstSkill + ":" + secondSkill);
         return damage;
     }
 
@@ -92,7 +99,6 @@ public class Wizard extends Player {
         baseHp = (float) Math.min(0.3 * opponentMaxHp, pyromancer.getHp());
         procentFirstSkill *= Constants.drainPyormancer;
         firstSkill = procentFirstSkill * baseHp;
-        firstSkill = Math.round(firstSkill);
         if (landType == 'D') {
             firstSkill *= 1.1f;
         }
@@ -140,7 +146,6 @@ public class Wizard extends Player {
         baseHp = (float) Math.min(0.3 * opponentMaxHp, rogue.getHp());
         procentFirstSkill *= Constants.drainRogue;
         firstSkill = procentFirstSkill * baseHp;
-        firstSkill = Math.round(firstSkill);
         if (landType == 'D') {
             firstSkill *= 1.1f;
         }
@@ -183,20 +188,21 @@ public class Wizard extends Player {
     @Override
     public float attack(Wizard wizard, char landType) {
         // WIZARD LA WIZARD NU ARE DEFLECT
+        // drain
         float damage, firstSkill;
         float procentFirstSkill;
-        procentFirstSkill = 0.2f + 0.05f * wizard.getLevel();
+
+        procentFirstSkill = 0.2f + 0.05f * this.getLevel();
+
         float baseHp;
         float opponentMaxHp = Constants.wizardHp + Constants.wizardHpPerLevel * wizard.getLevel();
         baseHp = (float) Math.min(0.3 * opponentMaxHp, wizard.getHp());
         procentFirstSkill *= Constants.drainWizard;
-        procentFirstSkill = procentFirstSkill - (0.2f * procentFirstSkill);
         firstSkill = procentFirstSkill * baseHp;
-        firstSkill = Math.round(firstSkill);
-        damage = firstSkill;
         if (landType == 'D') {
-            damage *= 1.1f;
+            firstSkill *= 1.1f;
         }
+        damage = firstSkill;
         return damage;
     }
 

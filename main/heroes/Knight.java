@@ -135,10 +135,12 @@ public class Knight extends Player {
         wizard.overtimeRounds = 1;
         slam = Constants.slam + Constants.slamBonus * wizard.getLevel();
         slam *= Constants.slamWizard;
+//        System.out.println("Damage knight-wizard:" + damage * 1.15f + ":" + slam * 1.15f);
         damage += slam;
         if (landType == 'L') {
-            damage *= 1.15;
+            damage *= 1.15f;
         }
+//        System.out.println("Damage knight-wizard:" + damage);
         return damage;
     }
 

@@ -99,48 +99,50 @@ public class Main {
                                 && it.getFight() == false && players.get(j).getFight() == false
                                 && it.getHp() > 0 && players.get(j).getHp() > 0) {
 
-                            if (players.get(j).getHp() > 0) {
-                                firstDamage = it.isAttackedBy(players.get(j), map[X][Y]);
+//                            if (players.get(j).getHp() > 0) {
+                            secondDamage = players.get(j).isAttackedBy(it, map[X][Y]);
+                            players.get(j).setFight();
+
+                            firstDamage = it.isAttackedBy(players.get(j), map[X][Y]);
 //                            System.out.println(it.getName() + " : " + firstDamage);
-                                it.setFight();
-                            }
+                            it.setFight();
+//                            }
 
-                            if (it.getHp() > 0) {
-                                secondDamage = players.get(j).isAttackedBy(it, map[X][Y]);
-                                players.get(j).setFight();
-                            }
+//                            if (it.getHp() > 0) {
+//                            }
 
-                            if (firstDamage >= it.getHp() && it.getHp() > 0) {
+//                            System.out.println(it.getName() + " a dat damage " + secondDamage + " lui " + players.get(j).getName());
+//                            System.out.println(players.get(j).getName() + " a dat damage " + firstDamage + " lui " + it.getName());
+
+                            if (secondDamage >= players.get(j).getHp() /*&& players.get(j).getHp() > 0*/) {
+                                players.get(j).setHp(0);
+                                it.addXp(players.get(j));
+                            }
+                            if (firstDamage >= it.getHp() /*&& it.getHp() > 0*/) {
                                 it.setHp(0);
                                 players.get(j).addXp(it);
                             }
 
-                            if (secondDamage >= players.get(j).getHp() && players.get(j).getHp() > 0) {
-                                players.get(j).setHp(0);
-                                it.addXp(players.get(j));
-                            }
-
-
-                            if (secondDamage < players.get(j).getHp() && players.get(j).getHp() > 0) {
-                                players.get(j).setHp((players.get(j).getHp() - secondDamage));
-//                                players.get(j).checkOvertime(it);
-//                                it.addXp(players.get(j));
-                            }
-
-                            if (firstDamage < it.getHp() && it.getHp() > 0) {
+                            if (firstDamage < it.getHp() /*&& it.getHp() > 0*/) {
                                 it.setHp(it.getHp() - firstDamage);
 //                                it.checkOvertime(players.get(j));
 //                                players.get(j).addXp(it);
                             }
 
+                            if (secondDamage < players.get(j).getHp() /*&& players.get(j).getHp() > 0*/) {
+                                players.get(j).setHp((players.get(j).getHp() - secondDamage));
+//                                players.get(j).checkOvertime(it);
+//                                it.addXp(players.get(j));
+                            }
 
-                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
-                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
-                                    + players.get(j).getX() + " " + players.get(j).getY()));
 
-                            System.out.println((it.getName() + " " + it.getLevel()
-                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
-                                    + it.getX() + " " + it.getY()));
+//                            System.out.println((it.getName() + " " + it.getLevel()
+//                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
+//                                    + it.getX() + " " + it.getY()));
+//
+//                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
+//                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
+//                                    + players.get(j).getX() + " " + players.get(j).getY()));
 
 //                            System.out.println(it.getName() + " " + it.getHp());
 //                            System.out.println(players.get(j).getName() + " " + players.get(j).getHp());
@@ -164,7 +166,7 @@ public class Main {
 //            }
 //        }
 
-        System.out.println("*************************************");
+//        System.out.println("*************************************");
         String filename = args[1];
         try {
             fileio.implementations.FileWriter fileWriter = new fileio.implementations.FileWriter(filename);
