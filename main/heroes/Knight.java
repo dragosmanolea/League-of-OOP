@@ -3,6 +3,8 @@ package main.heroes;
 public final class Knight extends Player {
     public Knight(final int x, final int y) {
         this.hp = Constants.KNIGHT_HP;
+        this.initialHp = this.hp;
+        this.bonusHpPerLevel = Constants.KNIGHT_HP_PER_LEVEL;
         this.x = x;
         this.y = y;
         this.name = "K";
@@ -151,8 +153,8 @@ public final class Knight extends Player {
         this.xp = xp + Math.max(0, Constants.DOUA_SUTE
                 - (this.level - loser.level) * Constants.PATRUZECI);
         if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
-            level++;
-            this.hp = Constants.KNIGHT_HP + Constants.KNIGHT_HP_PER_LEVEL * level;
+            level += (this.xp - 250) / 50 + 1;
+            this.hp = this.initialHp + this.bonusHpPerLevel * this.level;
         }
     }
 }

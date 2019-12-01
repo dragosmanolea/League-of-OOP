@@ -92,42 +92,53 @@ public class Main {
 
                             firstDamage = it.isAttackedBy(players.get(j), map[playerX][playerY]);
                             it.setFight();
+
+
                             if (secondDamage >= players.get(j).getHp()) {
                                 players.get(j).setHp(0);
                                 it.addXp(players.get(j));
-                            }
-                            if (firstDamage >= it.getHp()) {
-                                it.setHp(0);
-                                players.get(j).addXp(it);
-                            }
-
-                            if (firstDamage < it.getHp()) {
-                                it.setHp(it.getHp() - firstDamage);
-                            }
-
-                            if (secondDamage < players.get(j).getHp()) {
+                            }  else {
                                 players.get(j).setHp((players.get(j).getHp()
                                         - secondDamage));
                             }
 
+                            if (firstDamage >= it.getHp()) {
+                                it.setHp(0);
+                                players.get(j).addXp(it);
+                            } else {
+                                it.setHp(it.getHp() - firstDamage);
 
-                            System.out.println((it.getName() + " " + it.getLevel()
-                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
-                                    + it.getX() + " " + it.getY()));
+                            }
 
-                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
-                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
-                                    + players.get(j).getX() + " " + players.get(j).getY()));
+//                            System.out.println(it.getName() + ":" + firstDamage);
+//                            System.out.println(players.get(j).getName() + ":" + secondDamage);
+//
+//                            System.out.println((it.getName() + " " + it.getLevel()
+//                                    + " " + it.getXp() + " " + (int) it.getHp() + " "
+//                                    + it.getX() + " " + it.getY()));
+//
+//
+//                            System.out.println((players.get(j).getName() + " " + players.get(j).getLevel()
+//                                    + " " + players.get(j).getXp() + " " + (int) players.get(j).getHp() + " "
+//                                    + players.get(j).getX() + " " + players.get(j).getY()));
+//
+//                            System.out.println("Astia de sus s-au batut");
+
+//                            for (Player xxx : players) {
+//                                System.out.println((xxx.getName() + " " + xxx.getLevel()
+//                                        + " " + xxx.getXp() + " " + (int) xxx.getHp() + " "
+//                                        + xxx.getX() + " " + xxx.getY()));
+//                            }
                         }
                     }
                 }
             }
-            System.out.println("___________");
-            System.out.println(players);
-            System.out.println("End of round");
+//            System.out.println("___________");
+//            System.out.println(players);
+//            System.out.println("End of round");
         }
 
-        System.out.println("*********************");
+//        System.out.println("*********************");
         String filename = args[1];
         try {
             fileio.implementations.FileWriter fileWriter

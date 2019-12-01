@@ -4,7 +4,8 @@ public abstract class Player {
     protected int xp = 0;
     protected float hp;
     protected int level = 0;
-    protected int xpLevelUp;
+    protected float initialHp;
+    protected float bonusHpPerLevel;
     protected int x;
     protected int y;
     protected int overtimeRounds;

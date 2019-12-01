@@ -3,6 +3,8 @@ package main.heroes;
 public final class Pyromancer extends Player {
     public Pyromancer(final int x, final int y) {
         this.hp = Constants.PYROMANCER_HP;
+        this.initialHp = this.hp;
+        this.bonusHpPerLevel = Constants.PYROMANCER_HP_PER_LEVEL;
         this.x = x;
         this.y = y;
         this.name = "P";
@@ -106,14 +108,11 @@ public final class Pyromancer extends Player {
     }
 
     public void addXp(final Player loser) {
-        this.xp = xp + Math.max(0,
-                Constants.DOUA_SUTE
-                        - (this.level - loser.level) * Constants.PATRUZECI);
-        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI
-                + level * Constants.CINCIZECI)) {
-            level++;
-            this.hp = Constants.PYROMANCER_HP
-                    + Constants.PYROMANCER_HP_PER_LEVEL * level;
+        this.xp = xp + Math.max(0, Constants.DOUA_SUTE
+                - (this.level - loser.level) * Constants.PATRUZECI);
+        if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
+            level += (this.xp - 250) / 50 + 1;
+            this.hp = this.initialHp + this.bonusHpPerLevel * this.level;
         }
     }
 }

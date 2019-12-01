@@ -4,6 +4,8 @@ public final class Rogue extends Player {
     private int backstab;
     public Rogue(final int x, final int y) {
         this.hp = Constants.ROGUE_HP;
+        this.initialHp = this.hp;
+        this.bonusHpPerLevel = Constants.ROGUE_HP_PER_LEVEL;
         this.x = x;
         this.y = y;
         this.name = "R";
@@ -157,11 +159,11 @@ public final class Rogue extends Player {
     }
 
     public void addXp(final Player loser) {
-        this.xp = xp
-                + Math.max(0, Constants.DOUA_SUTE - (this.level - loser.level) * Constants.PATRUZECI);
+        this.xp = xp + Math.max(0, Constants.DOUA_SUTE
+                - (this.level - loser.level) * Constants.PATRUZECI);
         if (this.xp > (Constants.DOUA_SUTE_CINCIZECI + level * Constants.CINCIZECI)) {
-            level++;
-            this.hp = Constants.ROGUE_HP + Constants.ROGUE_HP_PER_LEVEL * level;
+            level += (this.xp - 250) / 50 + 1;
+            this.hp = this.initialHp + this.bonusHpPerLevel * this.level;
         }
     }
 }
